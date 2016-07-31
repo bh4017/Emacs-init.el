@@ -1,5 +1,5 @@
-# Emacs-init.el
-A repository for my Emacs init file
+# Emacs-stuff
+A repository for my Emacs init file and other Emacs related things
 
 NOTE: I am very new to Emacs so my init file will probably change a lot as I stary getting used to the program!
 
