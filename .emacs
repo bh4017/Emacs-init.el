@@ -4,9 +4,20 @@
 ;; =================================================
 ;; LOAD PACKAGES
 ;; =================================================
-(load "journal")   ;; Mode for journal entries
-(load "php-mode")  ;; Major mode for editing php files
-(load "mtl-mode")  ;; Major mode for editing Aeroflex MTL files
+;(load "journal")   ;; Mode for journal entries
+;(load "php-mode")  ;; Major mode for editing php files
+;(load "mtl-mode")  ;; Major mode for editing Aeroflex MTL files
+
+;; =================================================
+;; ADD MELPA PACKAGES
+;; =================================================
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list
+   'package-archives
+   '("melpa" . "http://melpa.org/packages/")
+   t)
+  (package-initialize))
 
 ;; =================================================
 ;; ORG-MODE CUSTOMISATIONS
@@ -1898,17 +1909,6 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (setq org-odd-levels-only nil)
 
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-
-;; =================================================
-;; ADD MELPA PACKAGES
-;; =================================================
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
-  (package-initialize))
 
 ;; =================================================
 ;; GENERAL CUSTOMISATIONS
