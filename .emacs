@@ -153,10 +153,14 @@
 (setq org-capture-templates
       (quote (("t" "todo" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("i" "Interruption" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
+               "* INTERRUPTION with %? :INTERRUPTION:\n%U\n" :clock-in t :clock-resume t)
               ("r" "respond" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
               ("n" "note" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+              ("c" "Production Callout" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/callouts.org")
+               "* CALLOUT %? :CALLOUT:\n%U" :clock-in t :clock-resume t)
               ("j" "Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
@@ -1925,5 +1929,8 @@ Late deadlines first, then scheduled, then non-late deadlines"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tsdh-dark))))
+ '(ansi-color-names-vector
+   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(custom-enabled-themes (quote (manoj-dark)))
+ '(tool-bar-mode nil))
 
