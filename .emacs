@@ -163,6 +163,8 @@
                "* CALLOUT %? :CALLOUT:\n%U" :clock-in t :clock-resume t)
               ("j" "Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
+              ("J" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
+               "* %?\n%U\n" :clock-in t :clock-resume t)
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ("m" "Meeting" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
@@ -1921,6 +1923,10 @@ Late deadlines first, then scheduled, then non-late deadlines"
 ;; Use spaces instead of tab characters for tabs
 (setq-default indent-tabs-mode nil)
 
+;; DELPHI MODE CUSTOMISATIONS
+(add-to-list 'auto-mode-alist '("\\.pas$" . delphi-mode))
+(add-to-list 'auto-mode-alist '("\\.dpr$" . delphi-mode))
+
 ;; =================================================
 ;; THEME
 ;; =================================================
@@ -1932,5 +1938,8 @@ Late deadlines first, then scheduled, then non-late deadlines"
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(custom-enabled-themes (quote (manoj-dark)))
+ '(org-startup-truncated nil)
+ '(package-selected-packages (quote (figlet smex org bbdb)))
  '(tool-bar-mode nil))
 
+(put 'upcase-region 'disabled nil)
