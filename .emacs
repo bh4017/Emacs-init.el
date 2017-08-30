@@ -153,8 +153,10 @@
 (setq org-capture-templates
       (quote (("t" "todo" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-              ("i" "Interruption" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
-               "* INTERRUPTION with %? :INTERRUPTION:\n%U\n" :clock-in t :clock-resume t)
+              ("u" "Unscheduled Task" entry (file+datetree "~/ownCloud/Documents/emacs/org/unscheduled.org")
+               "* UNSCHEDULED TASK FROM: %? :UNSCHEDULED:TASK:\n%U" :clock-in t :clock-resume t)
+              ("i" "Interruption" entry (file+datetree "~/ownCloud/Documents/emacs/org/unscheduled.org")
+               "* INTERRUPTION with %? :INTERRUPTION:UNSCHEDULED:\n%U" :clock-in t :clock-resume t)
               ("r" "respond" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
               ("n" "note" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
@@ -871,7 +873,7 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
 (add-to-list 'org-modules 'org-habit)
 
 ;; Don't enable this because it breaks access to emacs from my Android phone
-(setq org-startup-with-inline-images nil)
+(setq org-startup-with-inline-images t)
 
 ; experimenting with docbook exports - not finished
 (setq org-export-docbook-xsl-fo-proc-command "fop %s %s")
