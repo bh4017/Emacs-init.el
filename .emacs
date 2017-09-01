@@ -19,6 +19,17 @@
    t)
   (package-initialize))
 
+(require 'ido)
+(ido-mode t)
+;; =================================================
+;; ENABLE EDITING OF ROOT FILES
+;; =================================================
+(defadvice ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+  (unless (and buffer-file-name
+               (file-writable-p buffer-file-name))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
 ;; =================================================
 ;; ORG-MODE CUSTOMISATIONS
 ;; Taken and adapted from doc.norang.ca/org-mode
@@ -27,8 +38,6 @@
 ;; can override the document path by setting your path in the variable
 ;; org-mode-user-lisp-path
 ;;
-(require 'ido)
-(ido-mode t)
 
 (if (boundp 'org-mode-user-lisp-path)
     (add-to-list 'load-path org-mode-user-lisp-path)
@@ -36,7 +45,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 (require 'org)
-;;
+
+;; 
 ;; Standard key bindings
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -155,14 +165,12 @@
                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
               ("u" "Unscheduled Task" entry (file+datetree "~/ownCloud/Documents/emacs/org/unscheduled.org")
                "* UNSCHEDULED TASK FROM: %? :UNSCHEDULED:TASK:\n%U" :clock-in t :clock-resume t)
-              ("i" "Interruption" entry (file+datetree "~/ownCloud/Documents/emacs/org/unscheduled.org")
-               "* INTERRUPTION with %? :INTERRUPTION:UNSCHEDULED:\n%U" :clock-in t :clock-resume t)
               ("r" "respond" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
               ("n" "note" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("c" "Production Callout" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/callouts.org")
-               "* CALLOUT %? :CALLOUT:\n%U" :clock-in t :clock-resume t)
+               "* CALLOUT %? :CALLOUT:UNSCHEDULED:%^g\n%U" :clock-in t :clock-resume t)
               ("j" "Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
               ("J" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
@@ -170,9 +178,9 @@
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ("m" "Meeting" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
-               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+               "* MEETING with %? :MEETING:UNSCHEDULED:\n%U" :clock-in t :clock-resume t)
               ("p" "Phone call" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
-               "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
+               "* PHONE %? :PHONE:UNSCHEDULED:\n%U" :clock-in t :clock-resume t)
               ("h" "Habit" entry (file "~/refile.org")
                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 
