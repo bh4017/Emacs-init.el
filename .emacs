@@ -164,7 +164,7 @@
       (quote (("t" "todo" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO %? :P:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("u" "Unscheduled Task" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
-               "* UNSCHEDULED TASK FROM: %? %? :U:\n%U\n%a\n" :clock-in t :clock-resume t)
+               "* UNSCHEDULED TASK FROM: %? :U:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("r" "respond" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
               ("n" "note" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
@@ -173,7 +173,7 @@
                "* CALLOUT %? :CALLOUT:U:%^g\n%U" :clock-in t :clock-resume t)
               ("j" "Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
-              ("J" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
+              ("k" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
@@ -489,9 +489,9 @@ A prefix arg forces clock in of the default task."
 
 ; Tags with fast selection keys
 (setq org-tag-alist (quote ((:startgroup)
-                            ("@errand" . ?e)
-                            ("@office" . ?o)
-                            ("@home" . ?H)
+                            ("@PRODUCTION" . ?e)
+                            ("@ENGINEERING" . ?o)
+                            ("@ADMINISTRATION" . ?H)
                             ("@farm" . ?f)
                             (:endgroup)
                             ("WAITING" . ?w)
@@ -1926,6 +1926,55 @@ Late deadlines first, then scheduled, then non-late deadlines"
 
 (run-at-time "00:59" 3600 'org-save-all-org-buffers)
 
+;; CLOCKTABLES BY TAG [added 2017-09-06 BJH]
+(require 'org-table)
+(require 'org-clock)
+
+(defun clocktable-by-tag/shift-cell (n)
+  (let ((str ""))
+    (dotimes (i n)
+      (setq str (concat str "| ")))
+    str))
+
+(defun clocktable-by-tag/insert-tag (params)
+  (let ((tag (plist-get params :tags)))
+    (insert "|--\n")
+    (insert (format "| %s | *Tag time* |\n" tag))
+    (let ((total 0))
+  (mapcar
+       (lambda (file)
+     (let ((clock-data (with-current-buffer (find-file-noselect file)
+                 (org-clock-get-table-data (buffer-name) params))))
+       (when (> (nth 1 clock-data) 0)
+         (setq total (+ total (nth 1 clock-data)))
+         (insert (format "| | File *%s* | %.2f |\n"
+                 (file-name-nondirectory file)
+                 (/ (nth 1 clock-data) 60.0)))
+         (dolist (entry (nth 2 clock-data))
+           (insert (format "| | . %s%s | %s %.2f |\n"
+                   (org-clocktable-indent-string (nth 0 entry))
+                   (nth 1 entry)
+                   (clocktable-by-tag/shift-cell (nth 0 entry))
+                   (/ (nth 3 entry) 60.0)))))))
+       (org-agenda-files))
+      (save-excursion
+    (re-search-backward "*Tag time*")
+    (org-table-next-field)
+    (org-table-blank-field)
+    (insert (format "*%.2f*" (/ total 60.0)))))
+    (org-table-align)))
+
+(defun org-dblock-write:clocktable-by-tag (params)
+  (insert "| Tag | Headline | Time (h) |\n")
+  (insert "|     |          | <r>  |\n")
+  (let ((tags (plist-get params :tags)))
+    (mapcar (lambda (tag)
+          (setq params (plist-put params :tags tag))
+          (clocktable-by-tag/insert-tag params))
+        tags)))
+
+(provide 'clocktable-by-tag)
+
 ;; =================================================
 ;; GENERAL CUSTOMISATIONS
 ;; =================================================
@@ -1949,7 +1998,9 @@ Late deadlines first, then scheduled, then non-late deadlines"
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(custom-enabled-themes (quote (manoj-dark)))
  '(org-startup-truncated nil)
- '(package-selected-packages (quote (figlet smex org bbdb)))
+ '(package-selected-packages
+   (quote
+    (exec-path-from-shell gnuplot-mode gnuplot figlet smex org bbdb)))
  '(tool-bar-mode nil))
 
 (put 'upcase-region 'disabled nil)
