@@ -421,7 +421,7 @@ as the default task."
           (when bh/keep-clock-running
             (bh/clock-in-default-task)))))))
 
-(defvar bh/organization-task-id "eb155a82-92b2-4f25-a3c6-0304591af2f9")
+(defvar bh/organization-task-id "eb155a82-92b2-4f25-a3c6-0304591af2e3")
 
 (defun bh/clock-in-organization-task-as-default ()
   (interactive)
@@ -489,18 +489,15 @@ A prefix arg forces clock in of the default task."
 
 ; Tags with fast selection keys
 (setq org-tag-alist (quote ((:startgroup)
-                            ("@PRODUCTION" . ?e)
-                            ("@ENGINEERING" . ?o)
-                            ("@ADMINISTRATION" . ?H)
-                            ("@farm" . ?f)
+                            ("@PRODUCTION" . ?p)
+                            ("@ENGINEERING" . ?e)
+                            ("@ADMINISTRATION" . ?a)
                             (:endgroup)
                             ("WAITING" . ?w)
                             ("HOLD" . ?h)
                             ("PERSONAL" . ?P)
                             ("WORK" . ?W)
-                            ("FARM" . ?F)
                             ("ORG" . ?O)
-                            ("NORANG" . ?N)
                             ("crypt" . ?E)
                             ("NOTE" . ?n)
                             ("CANCELLED" . ?c)
