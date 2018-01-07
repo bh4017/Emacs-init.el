@@ -164,7 +164,7 @@
       (quote (("t" "todo" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO %? :P:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("u" "Unscheduled Task" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
-               "* UNSCHEDULED TASK FROM: %? :U:\n%U\n%a\n" :clock-in t :clock-resume t)
+               "* TODO [UNSCHEDULED] %? :U:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("r" "respond" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
               ("n" "note" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
@@ -491,7 +491,6 @@ A prefix arg forces clock in of the default task."
 (setq org-tag-alist (quote ((:startgroup)
                             ("@PRODUCTION" . ?p)
                             ("@ENGINEERING" . ?e)
-                            ("@ADMINISTRATION" . ?a)
                             (:endgroup)
                             ("WAITING" . ?w)
                             ("HOLD" . ?h)
@@ -501,6 +500,7 @@ A prefix arg forces clock in of the default task."
                             ("crypt" . ?E)
                             ("NOTE" . ?n)
                             ("CANCELLED" . ?c)
+                            ("ADMIN" . ?A)
                             ("FLAGGED" . ??))))
 
 ; Allow setting single tags without the menu
@@ -1973,6 +1973,12 @@ Late deadlines first, then scheduled, then non-late deadlines"
         tags)))
 
 (provide 'clocktable-by-tag)
+
+;; SET org-duration-format to hh:mm
+(setq org-duration-format 'h:mm)
+
+;; Allow out-of-bounds table columns to grow
+(setq org-table-formula-create-columns t)
 
 ;; =================================================
 ;; GENERAL CUSTOMISATIONS
