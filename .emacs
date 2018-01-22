@@ -175,6 +175,8 @@
                "* %?\n%U\n" :clock-in t :clock-resume t)
               ("k" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
+              ("d" "Discussion" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/discussions.org")
+               "* DISCUSSION with %? :DISCUSSION:U:\n%U\n" :clock-in t :clock-resume t)
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ("m" "Meeting" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
