@@ -178,8 +178,6 @@
                    "* %?\n%U\n" :clock-in t :clock-resume t)
                   ("jh" "Health Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/healthjournal.org")
                    "* %? %^g\n%^{TIME}p\n%^{LENGTH}p\n%^{SEVERITY}p\n** CIRCUMSTANCES\n%^{CIRCUMSTANCES}\n** SYMPTOMS\n%^{SYMPTOMS}\n** COMMENTS\n%^{COMMENTS}\n%U")
-              ("k" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
-               "* %?\n%U\n" :clock-in t :clock-resume t)
               ("d" "Discussion" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/discussions.org")
                "* DISCUSSION with %? :DISCUSSION:U:\n%U\n" :clock-in t :clock-resume t)
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
