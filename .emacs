@@ -171,7 +171,6 @@
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("c" "Production Callout" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/callouts.org")
                "* CALLOUT %? :CALLOUT:U:%^g\n%U" :clock-in t :clock-resume t)
-<<<<<<< HEAD
               ("j" "Journal")
                   ("jp" "Private Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
                    "* %?\n%U\n" :clock-in t :clock-resume t)
@@ -179,14 +178,10 @@
                    "* %?\n%U\n" :clock-in t :clock-resume t)
                   ("jh" "Health Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/healthjournal.org")
                    "* %? %^g\n%^{TIME}p\n%^{LENGTH}p\n%^{SEVERITY}p\n** CIRCUMSTANCES\n%^{CIRCUMSTANCES}\n** SYMPTOMS\n%^{SYMPTOMS}\n** COMMENTS\n%^{COMMENTS}\n%U")
-=======
-              ("j" "Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
-               "* %?\n%U\n" :clock-in t :clock-resume t)
               ("k" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
               ("d" "Discussion" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/discussions.org")
                "* DISCUSSION with %? :DISCUSSION:U:\n%U\n" :clock-in t :clock-resume t)
->>>>>>> 6d7bdf2d2ce1fbb59724e2ddf10f30d21a1fbc16
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ("m" "Meeting" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
