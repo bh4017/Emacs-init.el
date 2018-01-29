@@ -171,10 +171,13 @@
                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
               ("c" "Production Callout" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/callouts.org")
                "* CALLOUT %? :CALLOUT:U:%^g\n%U" :clock-in t :clock-resume t)
-              ("j" "Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
-               "* %?\n%U\n" :clock-in t :clock-resume t)
-              ("k" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
-               "* %?\n%U\n" :clock-in t :clock-resume t)
+              ("j" "Journal")
+                  ("jp" "Private Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/diary.org")
+                   "* %?\n%U\n" :clock-in t :clock-resume t)
+                  ("jk" "KSR Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/ksr/journal.org")
+                   "* %?\n%U\n" :clock-in t :clock-resume t)
+                  ("jh" "Health Journal" entry (file+datetree "~/ownCloud/Documents/emacs/org/healthjournal.org")
+                   "* %? %^g\n%^{TIME}p\n%^{LENGTH}p\n%^{SEVERITY}p\n** CIRCUMSTANCES\n%^{CIRCUMSTANCES}\n** SYMPTOMS\n%^{SYMPTOMS}\n** COMMENTS\n%^{COMMENTS}\n%U")
               ("w" "org-protocol" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ("m" "Meeting" entry (file "~/ownCloud/Documents/emacs/org/refile.org")
@@ -1659,7 +1662,7 @@ Late deadlines first, then scheduled, then non-late deadlines"
 (org-crypt-use-before-save-magic)
 (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 ; GPG key to use for encryption
-(setq org-crypt-key "F0B66B40")
+(setq org-crypt-key "76760E4A")
 
 (setq org-crypt-disable-auto-save nil)
 
